@@ -1,0 +1,13 @@
+RewriteEngine On
+
+# Reescribe las solicitudes a /CS-AR-PHP/user-modules a /CS-AR-PHP/src/user-modules/UserModulesController.php
+RewriteRule ^user-modules$ src/user-modules/UserModulesController.php [L,NC]
+RewriteRule ^user-modules/([0-9]+)$ src/user-modules/UserModulesController.php?module=$1 [L,NC,QSA]
+
+# Aquí puedes agregar más reglas para otros módulos siguiendo el mismo patrón
+RewriteRule ^auth$ src/auth/AuthController.php [L,NC]
+
+# Redirigir todas las demás solicitudes a error.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ error.php [L,NC]
